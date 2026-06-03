@@ -710,6 +710,326 @@
   .reveal.visible { opacity: 1; transform: none; }
 
   /* ============================================
+     CERTIFICATES
+  ============================================ */
+  #certificates { background: var(--white); }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+
+  .cert-card:hover {
+    border-color: var(--accent-light);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(27,67,50,0.12);
+  }
+
+  .cert-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--accent-pale) 0%, #b7e4c7 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cert-thumb::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 2px dashed rgba(27,67,50,0.2);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  .cert-thumb-icon { font-size: 2.5rem; }
+
+  .cert-thumb-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cert-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(27,67,50,0.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+    gap: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  .cert-card:hover .cert-hover-overlay { opacity: 1; }
+
+  .cert-info {
+    padding: 1rem 1.1rem;
+  }
+
+  .cert-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+    line-height: 1.35;
+  }
+
+  .cert-issuer {
+    font-size: 12px;
+    color: var(--accent-light);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  .cert-year {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+
+  /* ============================================
+     SLIDESHOW MODAL
+  ============================================ */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,20,0.92);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(6px);
+  }
+
+  .modal-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-box {
+    position: relative;
+    width: min(780px, 92vw);
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    transform: scale(0.93) translateY(12px);
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .modal-backdrop.open .modal-box {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    line-height: 1;
+  }
+
+  .modal-close:hover { background: rgba(0,0,0,0.8); }
+
+  /* Slideshow stage */
+  .slideshow-stage {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--accent-pale) 0%, #b7e4c7 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
+  .slide.exit-left {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  .slide-cert-icon { font-size: 4.5rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1)); }
+
+  .slide-cert-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    background: white;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* Nav arrows */
+  .slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    color: var(--ink);
+  }
+
+  .slide-arrow:hover { background: white; transform: translateY(-50%) scale(1.08); }
+  .slide-arrow.prev { left: 1rem; }
+  .slide-arrow.next { right: 1rem; }
+
+  /* Dots */
+  .slide-dots {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(27,67,50,0.25);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+  }
+
+  .dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+
+  /* Modal info panel */
+  .modal-info {
+    padding: 1.5rem 1.75rem 1.75rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .modal-cert-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+    line-height: 1.25;
+  }
+
+  .modal-cert-meta {
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .modal-cert-issuer { color: var(--accent-light); font-weight: 500; }
+
+  .modal-counter {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    background: var(--surface-2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Auto-play progress bar */
+  .progress-bar-wrap {
+    height: 3px;
+    background: var(--surface-3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent-light);
+    width: 0%;
+    transition: width linear;
+  }
+
+  /* ============================================
      RESPONSIVE
   ============================================ */
   @media (max-width: 768px) {
@@ -739,7 +1059,7 @@
      📄 DOWNLOAD CV BUTTON (HERO)
 ============================================ -->
 <!-- Tambahkan di dalam .hero-actions -->
-<a href="https://drive.google.com/file/d/1ATUMQYp6R-icWWk_jg_Qvj-41qxsTthj/view?usp=drive_link" download class="btn-secondary">
+<a href="https://drive.google.com/uc?export=view&id=159djjYrR5_KRBENxEBsZAO4a9CLEHQJU" download class="btn-secondary">
   Download CV ↓
 </a></div>
   <div class="nav-links">
@@ -1044,40 +1364,174 @@
   </div>
 </section>
 
-
-<!-- ============================================
-     🎓 CERTIFICATE SLIDER (AUTO + SWIPE)
-============================================ -->
 <hr class="divider">
 
-<section id="certificates">
-  <div class="section-label reveal">Credentials</div>
-  <h2 class="section-title reveal">Certificates</h2>
+<!-- ============================================
+     CERTIFICATES — Add/edit your certificates below
+============================================ -->
+<section id="certificates" style="background: var(--white);">
+  <div class="section-label reveal" data-id="cert-label">Credentials</div>
+  <h2 class="section-title reveal" data-id="cert-title">Sertifikasi & Penghargaan</h2>
+  <p class="section-desc reveal" data-id="cert-desc">Sertifikat profesional yang saya raih sebagai bukti kompetensi di bidang Quality Assurance.</p>
 
-  <div class="cert-wrapper reveal">
-    <div class="cert-track" id="certTrack">
+  <div class="cert-grid">
 
-      <div class="cert-slide">
-        <img src="https://drive.google.com/file/d/1o56rigxyvXcPUZhl54yF271ctB52GNRN/view?usp=sharing" alt="DTE DevOps Engineer"
+    <!-- 🔹 CERT 1 — Edit: data-name, data-issuer, data-year, data-icon, data-color, data-index -->
+    <div class="cert-card reveal"
+         data-index="0"
+         data-name="ISTQB Certified Tester — Foundation Level"
+         data-issuer="ISTQB — International Software Testing Qualifications Board"
+         data-year="2021"
+         data-icon="🏅"
+         onclick="openSlideshow(this.dataset.index)">
+      <div class="cert-thumb" style="background: linear-gradient(135deg,#D8F3DC,#95D5B2);">
+        <div class="cert-thumb-icon">🏅</div>
+        <div class="cert-thumb-label">ISTQB</div>
+        <div class="cert-hover-overlay">🔍 View Certificate</div>
       </div>
-
-      <div class="cert-slide">
-        <img src="cert2.jpg" alt="Certificate 2">
+      <div class="cert-info">
+        <div class="cert-name">ISTQB Certified Tester — Foundation Level</div>
+        <div class="cert-issuer">ISTQB</div>
+        <div class="cert-year">2021</div>
       </div>
-
-      <div class="cert-slide">
-        <img src="cert3.jpg" alt="Certificate 3">
-      </div>
-
     </div>
-  </div>
 
-  <div class="cert-dots" id="certDots"></div>
+    <!-- 🔹 CERT 2 -->
+    <div class="cert-card reveal"
+         data-index="1"
+         data-name="AWS Certified Developer — Associate"
+         data-issuer="Amazon Web Services"
+         data-year="2022"
+         data-icon="☁️"
+         onclick="openSlideshow(this.dataset.index)">
+      <div class="cert-thumb" style="background: linear-gradient(135deg,#FFF3CD,#FFD166);">
+        <div class="cert-thumb-icon">☁️</div>
+        <div class="cert-thumb-label">AWS</div>
+        <div class="cert-hover-overlay">🔍 View Certificate</div>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">AWS Certified Developer — Associate</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-year">2022</div>
+      </div>
+    </div>
+
+    <!-- 🔹 CERT 3 -->
+    <div class="cert-card reveal"
+         data-index="2"
+         data-name="Playwright Test Automation — Professional"
+         data-issuer="Test Automation University"
+         data-year="2023"
+         data-icon="🎭"
+         onclick="openSlideshow(this.dataset.index)">
+      <div class="cert-thumb" style="background: linear-gradient(135deg,#E0D4F7,#C3A9F0);">
+        <div class="cert-thumb-icon">🎭</div>
+        <div class="cert-thumb-label">TAU</div>
+        <div class="cert-hover-overlay">🔍 View Certificate</div>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Playwright Test Automation — Professional</div>
+        <div class="cert-issuer">Test Automation University</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+
+    <!-- 🔹 CERT 4 -->
+    <div class="cert-card reveal"
+         data-index="3"
+         data-name="API Testing with Postman — Expert"
+         data-issuer="Postman Academy"
+         data-year="2022"
+         data-icon="📬"
+         onclick="openSlideshow(this.dataset.index)">
+      <div class="cert-thumb" style="background: linear-gradient(135deg,#FFE5D9,#FFB347);">
+        <div class="cert-thumb-icon">📬</div>
+        <div class="cert-thumb-label">Postman</div>
+        <div class="cert-hover-overlay">🔍 View Certificate</div>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">API Testing with Postman — Expert</div>
+        <div class="cert-issuer">Postman Academy</div>
+        <div class="cert-year">2022</div>
+      </div>
+    </div>
+
+    <!-- 🔹 CERT 5 -->
+    <div class="cert-card reveal"
+         data-index="4"
+         data-name="Performance Testing with k6"
+         data-issuer="Grafana Labs"
+         data-year="2023"
+         data-icon="⚡"
+         onclick="openSlideshow(this.dataset.index)">
+      <div class="cert-thumb" style="background: linear-gradient(135deg,#D4EAF7,#74C0FC);">
+        <div class="cert-thumb-icon">⚡</div>
+        <div class="cert-thumb-label">Grafana</div>
+        <div class="cert-hover-overlay">🔍 View Certificate</div>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Performance Testing with k6</div>
+        <div class="cert-issuer">Grafana Labs</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+
+    <!-- 🔹 CERT 6 -->
+    <div class="cert-card reveal"
+         data-index="5"
+         data-name="Docker for QA Engineers"
+         data-issuer="Docker Inc.</div>"
+         data-year="2023"
+         data-icon="🐳"
+         onclick="openSlideshow(this.dataset.index)">
+      <div class="cert-thumb" style="background: linear-gradient(135deg,#D0ECF8,#0DB7ED44);">
+        <div class="cert-thumb-icon">🐳</div>
+        <div class="cert-thumb-label">Docker</div>
+        <div class="cert-hover-overlay">🔍 View Certificate</div>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Docker for QA Engineers</div>
+        <div class="cert-issuer">Docker Inc.</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
+<!-- ============================================
+     CERTIFICATE SLIDESHOW MODAL
+============================================ -->
+<div class="modal-backdrop" id="certModal" onclick="handleBackdropClick(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeSlideshow()" title="Close">✕</button>
 
+    <!-- Auto-play progress bar -->
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
 
+    <!-- Slideshow stage -->
+    <div class="slideshow-stage" id="slideshowStage">
+      <!-- Slides injected by JS -->
+      <button class="slide-arrow prev" onclick="prevSlide()" title="Previous">‹</button>
+      <button class="slide-arrow next" onclick="nextSlide()" title="Next">›</button>
+      <div class="slide-dots" id="slideDots"></div>
+    </div>
 
+    <!-- Info panel -->
+    <div class="modal-info">
+      <div>
+        <div class="modal-cert-name" id="modalCertName">—</div>
+        <div class="modal-cert-meta">
+          <span class="modal-cert-issuer" id="modalCertIssuer">—</span>
+          <span id="modalCertYear">—</span>
+        </div>
+      </div>
+      <div class="modal-counter" id="modalCounter">1 / 6</div>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================
      CONTACT — Edit contact info
@@ -1168,7 +1622,8 @@
   };
   window.addEventListener('resize', checkWidth);
   checkWidth();
-
+  
+  
   // ============================================
   // 🌐 LANGUAGE SYSTEM
   // ============================================
@@ -1348,69 +1803,161 @@
       : 'Terima kasih! Saya akan segera menghubungi Anda.';
     alert(msg);
   }
-  
-  // ================================
-  // 🎓 CERTIFICATE SLIDER (TAMBAHKAN DI SINI)
-  // ================================
 
-  const track = document.getElementById("certTrack");
-  const slides = document.querySelectorAll(".cert-slide");
-  const dotsContainer = document.getElementById("certDots");
+  // ============================================
+  // 🎞️ CERTIFICATE SLIDESHOW ENGINE
+  // ============================================
+  const AUTOPLAY_MS = 4000;
 
-  let index = 0;
-  let startX = 0;
-  let isDragging = false;
+  // Collect all certificate data from DOM cards
+  const certData = Array.from(document.querySelectorAll('.cert-card')).map(el => ({
+    name:   el.dataset.name,
+    issuer: el.dataset.issuer,
+    year:   el.dataset.year,
+    icon:   el.dataset.icon,
+    bg:     el.querySelector('.cert-thumb').style.background
+  }));
 
-  slides.forEach((_, i) => {
-    const dot = document.createElement("div");
-    dot.classList.add("cert-dot");
-    if (i === 0) dot.classList.add("active");
-    dot.onclick = () => goToSlide(i);
-    dotsContainer.appendChild(dot);
-  });
+  let currentSlide = 0;
+  let autoplayTimer = null;
+  let progressTimer = null;
 
-  function updateSlider() {
-    track.style.transform = `translateX(-${index * 100}%)`;
+  function buildSlides() {
+    const stage = document.getElementById('slideshowStage');
+    // Remove old slides
+    stage.querySelectorAll('.slide').forEach(s => s.remove());
 
-    document.querySelectorAll(".cert-dot").forEach((dot, i) => {
-      dot.classList.toggle("active", i === index);
+    certData.forEach((cert, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'slide' + (i === 0 ? ' active' : '');
+      slide.innerHTML = `
+        <div class="slide-cert-icon">${cert.icon}</div>
+        <div class="slide-cert-badge">${cert.issuer.split(' — ')[0].split(' ')[0]}</div>
+      `;
+      slide.style.background = cert.bg;
+      // Insert before arrows
+      stage.querySelector('.slide-arrow.prev').before(slide);
     });
+
+    // Build dots
+    const dotsEl = document.getElementById('slideDots');
+    dotsEl.innerHTML = '';
+    certData.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.onclick = (e) => { e.stopPropagation(); goToSlide(i); };
+      dotsEl.appendChild(dot);
+    });
+
+    // Color the stage bg to first cert
+    stage.style.background = certData[0].bg;
+  }
+
+  function updateInfo(index) {
+    const cert = certData[index];
+    document.getElementById('modalCertName').textContent   = cert.name;
+    document.getElementById('modalCertIssuer').textContent = cert.issuer;
+    document.getElementById('modalCertYear').textContent   = cert.year;
+    document.getElementById('modalCounter').textContent    = `${index + 1} / ${certData.length}`;
+    // Update stage background
+    document.getElementById('slideshowStage').style.background = cert.bg;
+  }
+
+  function goToSlide(next, direction = 'next') {
+    const slides = document.querySelectorAll('#slideshowStage .slide');
+    const dots   = document.querySelectorAll('#slideDots .dot');
+    const prev   = currentSlide;
+
+    slides[prev].classList.remove('active');
+    slides[prev].classList.add(direction === 'next' ? 'exit-left' : 'exit-right');
+    setTimeout(() => slides[prev].classList.remove('exit-left', 'exit-right'), 420);
+
+    slides[next].classList.add('active');
+    dots[prev].classList.remove('active');
+    dots[next].classList.add('active');
+
+    currentSlide = next;
+    updateInfo(currentSlide);
+    resetProgress();
   }
 
   function nextSlide() {
-    index = (index + 1) % slides.length;
-    updateSlider();
+    const next = (currentSlide + 1) % certData.length;
+    goToSlide(next, 'next');
   }
 
   function prevSlide() {
-    index = (index - 1 + slides.length) % slides.length;
-    updateSlider();
+    const prev = (currentSlide - 1 + certData.length) % certData.length;
+    goToSlide(prev, 'prev');
   }
 
-  function goToSlide(i) {
-    index = i;
-    updateSlider();
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_MS);
   }
 
-  setInterval(nextSlide, 3500);
+  function stopAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
 
-  track.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-    isDragging = true;
+  function resetProgress() {
+    const fill = document.getElementById('progressFill');
+    fill.style.transition = 'none';
+    fill.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        fill.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+        fill.style.width = '100%';
+      });
+    });
+  }
+
+  function openSlideshow(index) {
+    buildSlides();
+    currentSlide = 0;
+    goToSlide(parseInt(index), 'next');
+
+    const modal = document.getElementById('certModal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    startAutoplay();
+    resetProgress();
+
+    // Keyboard navigation
+    document.addEventListener('keydown', onKeyDown);
+  }
+
+  function closeSlideshow() {
+    const modal = document.getElementById('certModal');
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    stopAutoplay();
+    const fill = document.getElementById('progressFill');
+    fill.style.transition = 'none';
+    fill.style.width = '0%';
+    document.removeEventListener('keydown', onKeyDown);
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('certModal')) closeSlideshow();
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft')  prevSlide();
+    if (e.key === 'Escape')     closeSlideshow();
+  }
+
+  // Pause autoplay on hover
+  document.getElementById('modalBox').addEventListener('mouseenter', stopAutoplay);
+  document.getElementById('modalBox').addEventListener('mouseleave', () => {
+    if (document.getElementById('certModal').classList.contains('open')) {
+      startAutoplay();
+      resetProgress();
+    }
   });
-
-  track.addEventListener("touchend", (e) => {
-    if (!isDragging) return;
-
-    let endX = e.changedTouches[0].clientX;
-    let diff = startX - endX;
-
-    if (diff > 50) nextSlide();
-    if (diff < -50) prevSlide();
-
-    isDragging = false;
-  });
-
 </script>
 
 </body>
