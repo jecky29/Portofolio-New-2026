@@ -97,6 +97,38 @@
 
   .nav-cta:hover { background: var(--accent-light); }
 
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+  }
+
+  .lang-btn {
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    color: var(--ink-muted);
+    background: transparent;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .lang-btn.active {
+    background: var(--accent);
+    color: white;
+  }
+
+  .lang-btn:not(.active):hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+
   /* ============================================
      HERO
   ============================================ */
@@ -703,15 +735,21 @@
      NAV — Edit name & links
 ============================================ -->
 <nav id="navbar">
-  <div class="nav-logo">// Software Quality Assurance Engineer</div>
+  <div class="nav-logo">// Sr. Software Quality Assurance Engineer</div>
   <div class="nav-links">
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#tools">Tools</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <a href="#skills" data-id="nav-skills">Skills</a>
+    <a href="#experience" data-id="nav-exp">Experience</a>
+    <a href="#tools" data-id="nav-tools">Tools</a>
+    <a href="#projects" data-id="nav-projects">Projects</a>
+    <a href="#contact" data-id="nav-contact">Contact</a>
   </div>
-  <a href="#contact" class="nav-cta">Hire Me</a>
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')" id="btn-id">ID</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-id="nav-cta">Hire Me</a>
+  </div>
 </nav>
 
 <!-- ============================================
@@ -720,29 +758,29 @@
 <section id="hero">
   <div class="hero-tag">
     <span class="hero-dot"></span>
-    Available for Opportunities
+    <span data-id="hero-tag">Available for Opportunities</span>
   </div>
-  <h1 class="hero-name"><em>Jecky Saputra</em><br></h1>
-  <p class="hero-role"><strong>Senior Quality Assurance Engineer</strong> · 7+ Tahun Pengalaman</p>
-  <p class="hero-desc">
+  <h1 class="hero-name"> <em>Jecky Saputra</em><br></h1>
+  <p class="hero-role"><strong>Senior Quality Assurance Engineer</strong> · <span data-id="hero-years">7+ Tahun Pengalaman</span></p>
+  <p class="hero-desc" data-id="hero-desc">
     Saya memastikan produk digital berjalan sempurna — dari manual testing hingga otomasi end-to-end. Berpengalaman membangun kerangka QA yang skalabel, meningkatkan kualitas produk, dan mempercepat delivery tim engineering.
   </p>
   <div class="hero-actions">
-    <a href="#projects" class="btn-primary">Lihat Portofolio →</a>
-    <a href="#contact" class="btn-secondary">Hubungi Saya</a>
+    <a href="#projects" class="btn-primary" data-id="hero-btn1">Lihat Portofolio →</a>
+    <a href="#contact" class="btn-secondary" data-id="hero-btn2">Hubungi Saya</a>
   </div>
   <div class="hero-stats">
     <div>
       <div class="stat-num">7<em>+</em></div>
-      <div class="stat-label">Tahun Pengalaman</div>
+      <div class="stat-label" data-id="stat1">Tahun Pengalaman</div>
     </div>
     <div>
       <div class="stat-num">500<em>+</em></div>
-      <div class="stat-label">Proyek Selesai</div>
+      <div class="stat-label" data-id="stat2">Proyek Selesai</div>
     </div>
     <div>
       <div class="stat-num">99<em>%</em></div>
-      <div class="stat-label">Bug Detection Rate</div>
+      <div class="stat-label" data-id="stat3">Bug Detection Rate</div>
     </div>
   </div>
 </section>
@@ -753,80 +791,63 @@
      SKILLS — Edit categories & tools
 ============================================ -->
 <section id="skills" style="background: var(--white);">
-  <div class="section-label reveal">Core Expertise</div>
-  <h2 class="section-title reveal">Apa yang Saya Kuasai</h2>
-  <p class="section-desc reveal">Keahlian mendalam di berbagai aspek Quality Assurance — dari testing manual hingga otomasi skala enterprise.</p>
+  <div class="section-label reveal" data-id="skills-label">Core Expertise</div>
+  <h2 class="section-title reveal" data-id="skills-title">Apa yang Saya Kuasai</h2>
+  <p class="section-desc reveal" data-id="skills-desc">Keahlian mendalam di berbagai aspek Quality Assurance — dari testing manual hingga otomasi skala enterprise.</p>
 
   <div class="skills-grid">
 
     <div class="skill-card reveal">
       <div class="skill-icon">🤖</div>
       <div class="skill-title">Test Automation</div>
-      <div class="skill-desc">Membangun framework otomasi yang handal untuk UI, API, dan regression testing yang berjalan cepat dan konsisten.</div>
+      <div class="skill-desc" data-id="skill-auto-desc">Membangun framework otomasi yang handal untuk UI, API, dan regression testing yang berjalan cepat dan konsisten.</div>
       <div class="skill-tags">
-        <span class="tag">Selenium</span>
-        <span class="tag">Playwright</span>
-        <span class="tag">Cypress</span>
-        <span class="tag">Appium</span>
+        <span class="tag">Selenium</span><span class="tag">Playwright</span><span class="tag">Cypress</span><span class="tag">Appium</span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">🔌</div>
       <div class="skill-title">API Testing</div>
-      <div class="skill-desc">Validasi contract, fungsionalitas, dan performa API menggunakan berbagai tools dan metodologi testing modern.</div>
+      <div class="skill-desc" data-id="skill-api-desc">Validasi contract, fungsionalitas, dan performa API menggunakan berbagai tools dan metodologi testing modern.</div>
       <div class="skill-tags">
-        <span class="tag">Postman</span>
-        <span class="tag">RestAssured</span>
-        <span class="tag">SoapUI</span>
-        <span class="tag">Karate</span>
+        <span class="tag">Postman</span><span class="tag"></span><span class="tag">SoapUI</span><span class="tag"></span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">⚡</div>
       <div class="skill-title">Performance Testing</div>
-      <div class="skill-desc">Load testing, stress testing, dan profiling performa untuk memastikan sistem stabil di bawah beban tinggi.</div>
+      <div class="skill-desc" data-id="skill-perf-desc">Load testing, stress testing, dan profiling performa untuk memastikan sistem stabil di bawah beban tinggi.</div>
       <div class="skill-tags">
-        <span class="tag">JMeter</span>
-        <span class="tag">k6</span>
-        <span class="tag">Gatling</span>
+        <span class="tag">JMeter</span><span class="tag">k6</span><span class="tag"></span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">🔄</div>
       <div class="skill-title">CI/CD & DevOps QA</div>
-      <div class="skill-desc">Mengintegrasikan testing ke dalam pipeline CI/CD agar quality gate berjalan otomatis di setiap deployment.</div>
+      <div class="skill-desc" data-id="skill-cicd-desc">Mengintegrasikan testing ke dalam pipeline CI/CD agar quality gate berjalan otomatis di setiap deployment.</div>
       <div class="skill-tags">
-        <span class="tag">Jenkins</span>
-        <span class="tag">GitHub Actions</span>
-        <span class="tag">Docker</span>
-        <span class="tag">GitLab CI</span>
+        <span class="tag">Bamboo</span><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">GitLab CI</span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">📋</div>
       <div class="skill-title">Test Management</div>
-      <div class="skill-desc">Perencanaan test, pembuatan test case, manajemen defect, dan pelaporan metrik kualitas kepada stakeholder.</div>
+      <div class="skill-desc" data-id="skill-mgmt-desc">Perencanaan test, pembuatan test case, manajemen defect, dan pelaporan metrik kualitas kepada stakeholder.</div>
       <div class="skill-tags">
-        <span class="tag">Jira</span>
-        <span class="tag">Zephyr</span>
-        <span class="tag">TestRail</span>
-        <span class="tag">Xray</span>
+        <span class="tag">Jira</span><span class="tag">Zephyr</span><span class="tag">TestRail</span><span class="tag">Xray</span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">📱</div>
       <div class="skill-title">Mobile Testing</div>
-      <div class="skill-desc">Testing aplikasi mobile native dan hybrid di Android & iOS menggunakan real device dan emulator/simulator.</div>
+      <div class="skill-desc" data-id="skill-mob-desc">Testing aplikasi mobile native dan hybrid di Android & iOS menggunakan real device dan emulator/simulator.</div>
       <div class="skill-tags">
-        <span class="tag">Appium</span>
-        <span class="tag">XCUITest</span>
-        <span class="tag">Espresso</span>
-        <span class="tag">BrowserStack</span>
+        <span class="tag">Appium</span><span class="tag">XCUITest</span><span class="tag">Espresso</span><span class="tag">BrowserStack</span>
       </div>
     </div>
 
@@ -839,52 +860,49 @@
      EXPERIENCE — Edit job history
 ============================================ -->
 <section id="experience">
-  <div class="section-label reveal">Track Record</div>
-  <h2 class="section-title reveal">Pengalaman Kerja</h2>
-  <p class="section-desc reveal">Perjalanan karir saya dalam membangun dan meningkatkan kualitas produk digital.</p>
+  <div class="section-label reveal" data-id="exp-label">Track Record</div>
+  <h2 class="section-title reveal" data-id="exp-title">Pengalaman Kerja</h2>
+  <p class="section-desc reveal" data-id="exp-desc">Perjalanan karir saya dalam membangun dan meningkatkan kualitas produk digital.</p>
 
   <div class="exp-timeline">
 
-    <!-- 🔹 JOB 1 — Edit this -->
     <div class="exp-item reveal">
       <div class="exp-dot"></div>
-      <div class="exp-period">Jan 2026 — Sekarang</div>
+      <div class="exp-period">Jan 2026 — <span data-id="present">Sekarang</span></div>
       <div class="exp-role">Quality Assurance Lead at PT Bank Danamon Indonesia</div>
-      <div class="exp-company">PT Accord Inovations · Jakarta</div>
-      <div class="exp-desc">Memimpin tim QA beranggotakan 5 orang dalam mengawal kualitas platform e-commerce dengan jutaan pengguna aktif.</div>
+      <div class="exp-company">PT. Accord Inovations</div>
+      <div class="exp-desc" data-id="exp1-desc">Memimpin tim QA beranggotakan 2 orang dalam mengawal kualitas platform e-commerce dengan jutaan pengguna aktif.</div>
       <ul class="exp-achievements">
-        <li>Membangun test automation framework dari nol menggunakan Playwright + TypeScript</li>
-        <li>Mengurangi regression testing time dari 3 hari menjadi 4 jam melalui otomasi</li>
-        <li>Mengimplementasikan API contract testing yang berhasil mencegah 30+ breaking changes</li>
-        <li>Meningkatkan code coverage dari 45% menjadi 82% dalam 6 bulan</li>
+        <li data-id="exp1-a1">Membangun test automation framework dari nol menggunakan Playwright + TypeScript</li>
+        <li data-id="exp1-a2">Mengurangi regression testing time dari 3 hari menjadi 4 jam melalui otomasi</li>
+        <li data-id="exp1-a3">Mengimplementasikan API contract testing yang berhasil mencegah 30+ breaking changes</li>
+        <li data-id="exp1-a4">Meningkatkan code coverage dari 45% menjadi 82% dalam 6 bulan</li>
       </ul>
     </div>
 
-    <!-- 🔹 JOB 2 — Edit this -->
     <div class="exp-item reveal">
       <div class="exp-dot"></div>
-      <div class="exp-period">Juni 2020 — Jan 2026</div>
-      <div class="exp-role">Software QA Engineer ( Tester Lead ) at PT Bank Rakyat Indonesia </div>
-      <div class="exp-company">PT. Satkomindo Mediyasa </div>
-      <div class="exp-desc">Bertanggung jawab atas testing platform fintech — mobile banking app dan backend API untuk transaksi keuangan.</div>
+      <div class="exp-period">Jan 2020 — Jan 2026</div>
+      <div class="exp-role">Software QA Engineer Tester Lead at PT Bank Rakyat Indonesia ( BRI )</div>
+      <div class="exp-company">PT. Satkomindo Mediyasa</div>
+      <div class="exp-desc" data-id="exp2-desc">Bertanggung jawab atas testing platform fintech — mobile banking app dan backend API untuk transaksi keuangan.</div>
       <ul class="exp-achievements">
-        <li>Merancang dan mengeksekusi 2000+ test case untuk fitur core banking</li>
-        <li>Menemukan critical security bug sebelum go-live yang berpotensi merugikan nasabah</li>
-        <li>Mengintegrasikan Appium ke Jenkins pipeline untuk mobile regression testing otomatis</li>
+        <li data-id="exp2-a1">Merancang dan mengeksekusi 2000+ test case untuk fitur core banking</li>
+        <li data-id="exp2-a2">Menemukan critical security bug sebelum go-live yang berpotensi merugikan nasabah</li>
+        <li data-id="exp2-a3">Mengintegrasikan Appium ke Jenkins pipeline untuk mobile regression testing otomatis</li>
       </ul>
     </div>
 
-    <!-- 🔹 JOB 3 — Edit this -->
     <div class="exp-item reveal">
       <div class="exp-dot"></div>
-      <div class="exp-period">Jan 2019 — Jan 2020</div>
-      <div class="exp-role">Junior QA Tester at PT Bank Rakyat Indonesia</div>
+      <div class="exp-period">Jan 2019 — Feb 2020</div>
+      <div class="exp-role">Junior QA Tester at PT Bank Rakyat Indonesia ( BRI )</div>
       <div class="exp-company">PT. Mutual+ Global Resource </div>
-      <div class="exp-desc">Memulai karir QA dengan fokus pada manual testing aplikasi web dan mobile untuk produk SaaS early-stage.</div>
+      <div class="exp-desc" data-id="exp3-desc">Memulai karir QA dengan fokus pada manual testing aplikasi web dan mobile untuk produk SaaS early-stage.</div>
       <ul class="exp-achievements">
-        <li>Melakukan functional, regression, dan UAT testing untuk 10+ fitur rilis per bulan</li>
-        <li>Membuat dokumentasi test plan dan bug report yang terstruktur dan detail</li>
-        <li>Mulai belajar otomasi dengan Selenium WebDriver dan Python</li>
+        <li data-id="exp3-a1">Melakukan functional, regression, dan UAT testing untuk 10+ fitur rilis per bulan</li>
+        <li data-id="exp3-a2">Membuat dokumentasi test plan dan bug report yang terstruktur dan detail</li>
+        <li data-id="exp3-a3">Mulai belajar otomasi dengan Selenium WebDriver dan Python</li>
       </ul>
     </div>
 
@@ -897,9 +915,9 @@
      TOOLS — Add/remove tools as needed
 ============================================ -->
 <section id="tools" style="background: var(--white);">
-  <div class="section-label reveal">Tech Stack</div>
-  <h2 class="section-title reveal">Tools & Teknologi</h2>
-  <p class="section-desc reveal">Alat-alat yang saya gunakan sehari-hari untuk memastikan kualitas produk.</p>
+  <div class="section-label reveal" data-id="tools-label">Tech Stack</div>
+  <h2 class="section-title reveal" data-id="tools-title">Tools & Teknologi</h2>
+  <p class="section-desc reveal" data-id="tools-desc">Alat-alat yang saya gunakan sehari-hari untuk memastikan kualitas produk.</p>
 
   <div class="tools-grid">
     <div class="tool-item reveal"><span class="tool-emoji">🎭</span>Playwright</div>
@@ -929,17 +947,16 @@
      PROJECTS — Edit project cards
 ============================================ -->
 <section id="projects">
-  <div class="section-label reveal">Portfolio</div>
-  <h2 class="section-title reveal">Proyek Unggulan</h2>
-  <p class="section-desc reveal">Beberapa proyek QA yang paling berdampak yang pernah saya kerjakan.</p>
+  <div class="section-label reveal" data-id="proj-label">Portfolio</div>
+  <h2 class="section-title reveal" data-id="proj-title">Proyek Unggulan</h2>
+  <p class="section-desc reveal" data-id="proj-desc">Beberapa proyek QA yang paling berdampak yang pernah saya kerjakan.</p>
 
   <div class="projects-grid">
 
-    <!-- 🔹 PROJECT 1 -->
     <div class="project-card reveal">
       <div class="project-tag">Automation Framework</div>
-      <div class="project-title">E2E Testing Framework untuk Platform E-Commerce</div>
-      <div class="project-desc">Membangun framework otomasi end-to-end dengan Playwright + TypeScript yang mencakup 500+ test case untuk user journey kritis — dari browse produk hingga checkout dan payment.</div>
+      <div class="project-title" data-id="proj1-title">E2E Testing Framework untuk Platform E-Commerce</div>
+      <div class="project-desc" data-id="proj1-desc">Membangun framework otomasi end-to-end dengan Playwright + TypeScript yang mencakup 500+ test case untuk user journey kritis — dari browse produk hingga checkout dan payment.</div>
       <div class="project-meta">
         <span class="project-tech">Playwright</span>
         <span class="project-tech">TypeScript</span>
@@ -948,11 +965,10 @@
       </div>
     </div>
 
-    <!-- 🔹 PROJECT 2 -->
     <div class="project-card reveal">
       <div class="project-tag">API Testing</div>
-      <div class="project-title">API Contract Testing untuk Microservices</div>
-      <div class="project-desc">Mengimplementasikan consumer-driven contract testing menggunakan Pact untuk 15 microservices, memastikan tidak ada breaking changes yang lolos ke production.</div>
+      <div class="project-title" data-id="proj2-title">API Contract Testing untuk Microservices</div>
+      <div class="project-desc" data-id="proj2-desc">Mengimplementasikan consumer-driven contract testing menggunakan Pact untuk 15 microservices, memastikan tidak ada breaking changes yang lolos ke production.</div>
       <div class="project-meta">
         <span class="project-tech">Pact</span>
         <span class="project-tech">Java</span>
@@ -961,24 +977,22 @@
       </div>
     </div>
 
-    <!-- 🔹 PROJECT 3 -->
     <div class="project-card reveal">
       <div class="project-tag">Performance Testing</div>
-      <div class="project-title">Load Testing Infrastruktur Fintech</div>
-      <div class="project-desc">Merancang dan menjalankan load test untuk backend API payment gateway — mensimulasikan 10.000 concurrent users dan mengidentifikasi 5 bottleneck performa sebelum peak season.</div>
+      <div class="project-title" data-id="proj3-title">Load Testing Infrastruktur Microservice</div>
+      <div class="project-desc" data-id="proj3-desc">Merancang dan menjalankan load test untuk backend API payment gateway — mensimulasikan 10.000 concurrent users dan mengidentifikasi 5 bottleneck performa sebelum peak season.</div>
       <div class="project-meta">
         <span class="project-tech">k6</span>
         <span class="project-tech">Grafana</span>
-        <span class="project-tech">InfluxDB</span>
-        <span class="project-tech">AWS</span>
+        <span class="project-tech">Jmeter</span>
+        
       </div>
     </div>
 
-    <!-- 🔹 PROJECT 4 -->
     <div class="project-card reveal">
       <div class="project-tag">Mobile Testing</div>
-      <div class="project-title">Mobile Regression Suite — Banking App</div>
-      <div class="project-desc">Membangun suite regression testing otomatis untuk aplikasi mobile banking (iOS + Android) dengan Appium, terintegrasi ke CI/CD pipeline dan BrowserStack real device cloud.</div>
+      <div class="project-title" data-id="proj4-title">Mobile Regression Suite — Banking App</div>
+      <div class="project-desc" data-id="proj4-desc">Membangun suite regression testing otomatis untuk aplikasi mobile banking (iOS + Android) dengan Appium, terintegrasi ke CI/CD pipeline dan BrowserStack real device cloud.</div>
       <div class="project-meta">
         <span class="project-tech">Appium</span>
         <span class="project-tech">Python</span>
@@ -997,17 +1011,16 @@
   <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;" class="contact-inner-wrap">
 
     <div>
-      <div class="section-label" style="color: var(--accent-pale);">Get In Touch</div>
-      <h2 class="section-title" style="color: white;">Mari Bekerjasama</h2>
-      <p class="section-desc" style="color: rgba(255,255,255,0.55); margin-bottom: 2rem;">Terbuka untuk peluang full-time, freelance, atau konsultasi QA. Jangan ragu menghubungi saya!</p>
+      <div class="section-label" style="color: var(--accent-pale);" data-id="contact-label">Get In Touch</div>
+      <h2 class="section-title" style="color: white;" data-id="contact-title">Mari Bekerjasama</h2>
+      <p class="section-desc" style="color: rgba(255,255,255,0.55); margin-bottom: 2rem;" data-id="contact-desc">Terbuka untuk peluang full-time, freelance, atau konsultasi QA. Jangan ragu menghubungi saya!</p>
 
       <div class="contact-links">
-        <!-- 🔹 Edit email, LinkedIn, GitHub -->
-        <div class="contact-link" onclick="window.location.href='mailto:jeckysaputra290694@gmail.com'">
+        <div class="contact-link" onclick="window.location.href='mailto:jackysaputra290694@gmail.com'">
           <div class="contact-link-icon">📧</div>
           <div>
             <div style="font-size: 11px; color: rgba(255,255,255,0.4); font-family: var(--font-mono); margin-bottom: 2px;">EMAIL</div>
-            jeckysaputra290694@gmail.com
+            jackysaputra290694@gmail.com
           </div>
         </div>
         <div class="contact-link" onclick="window.open('https://linkedin.com/in/jeckysaputra29')">
@@ -1021,7 +1034,7 @@
           <div class="contact-link-icon">🐙</div>
           <div>
             <div style="font-size: 11px; color: rgba(255,255,255,0.4); font-family: var(--font-mono); margin-bottom: 2px;">GITHUB</div>
-            github.com/username-anda
+            github.com/jecky29
           </div>
         </div>
       </div>
@@ -1030,25 +1043,25 @@
     <!-- Quick Message Form -->
     <div class="contact-form">
       <div class="form-group">
-        <label>Nama</label>
-        <input type="text" placeholder="Nama lengkap Anda">
+        <label data-id="form-name">Nama</label>
+        <input type="text" data-id="form-name-ph" placeholder="Nama lengkap Anda">
       </div>
       <div class="form-group">
         <label>Email</label>
-        <input type="email" placeholder="email@perusahaan.com">
+        <input type="email" data-id="form-email-ph" placeholder="email@perusahaan.com">
       </div>
       <div class="form-group">
-        <label>Pesan</label>
-        <textarea rows="4" placeholder="Ceritakan tentang proyek atau peluang yang ingin Anda diskusikan..."></textarea>
+        <label data-id="form-msg">Pesan</label>
+        <textarea rows="4" data-id="form-msg-ph" placeholder="Ceritakan tentang proyek atau peluang yang ingin Anda diskusikan..."></textarea>
       </div>
-      <button class="btn-submit" onclick="alert('Terima kasih! Saya akan segera menghubungi Anda.')">Kirim Pesan →</button>
+      <button class="btn-submit" data-id="form-submit" onclick="handleSubmit()">Kirim Pesan →</button>
     </div>
 
   </div>
 </section>
 
 <footer>
-  <p>Dibuat dengan ❤️ oleh <span>Jecky Saputra</span> · 2026</p>
+  <p data-id="footer-text">Dibuat dengan ❤️ oleh <span>	Jecky Saputra</span> · 2025</p>
 </footer>
 
 <!-- ============================================
@@ -1071,7 +1084,6 @@
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
   reveals.forEach(el => observer.observe(el));
 
   // Responsive contact grid
@@ -1081,6 +1093,186 @@
   };
   window.addEventListener('resize', checkWidth);
   checkWidth();
+
+  // ============================================
+  // 🌐 LANGUAGE SYSTEM
+  // ============================================
+  const translations = {
+    id: {
+      // Nav
+      'nav-skills':   'Skills',
+      'nav-exp':      'Experience',
+      'nav-tools':    'Tools',
+      'nav-projects': 'Projects',
+      'nav-contact':  'Contact',
+      'nav-cta':      'Hire Me',
+      // Hero
+      'hero-tag':     'Available for Opportunities',
+      'hero-years':   '7+ Tahun Pengalaman',
+      'hero-desc':    'Saya memastikan produk digital berjalan sempurna — dari manual testing hingga otomasi end-to-end. Berpengalaman membangun kerangka QA yang skalabel, meningkatkan kualitas produk, dan mempercepat delivery tim engineering.',
+      'hero-btn1':    'Lihat Portofolio →',
+      'hero-btn2':    'Hubungi Saya',
+      'stat1':        'Tahun Pengalaman',
+      'stat2':        'Proyek Selesai',
+      'stat3':        'Bug Detection Rate',
+      // Skills
+      'skills-label': 'Core Expertise',
+      'skills-title': 'Apa yang Saya Kuasai',
+      'skills-desc':  'Keahlian mendalam di berbagai aspek Quality Assurance — dari testing manual hingga otomasi skala enterprise.',
+      'skill-auto-desc': 'Membangun framework otomasi yang handal untuk UI, API, dan regression testing yang berjalan cepat dan konsisten.',
+      'skill-api-desc':  'Validasi contract, fungsionalitas, dan performa API menggunakan berbagai tools dan metodologi testing modern.',
+      'skill-perf-desc': 'Load testing, stress testing, dan profiling performa untuk memastikan sistem stabil di bawah beban tinggi.',
+      'skill-cicd-desc': 'Mengintegrasikan testing ke dalam pipeline CI/CD agar quality gate berjalan otomatis di setiap deployment.',
+      'skill-mgmt-desc': 'Perencanaan test, pembuatan test case, manajemen defect, dan pelaporan metrik kualitas kepada stakeholder.',
+      'skill-mob-desc':  'Testing aplikasi mobile native dan hybrid di Android & iOS menggunakan real device dan emulator/simulator.',
+      // Experience
+      'exp-label': 'Track Record',
+      'exp-title': 'Pengalaman Kerja',
+      'exp-desc':  'Perjalanan karir saya dalam membangun dan meningkatkan kualitas produk digital.',
+      'present':   'Sekarang',
+      'exp1-desc': 'Memimpin tim QA beranggotakan 5 orang dalam mengawal kualitas platform e-commerce dengan jutaan pengguna aktif.',
+      'exp1-a1':   'Membangun test automation framework dari nol menggunakan Playwright + TypeScript',
+      'exp1-a2':   'Mengurangi regression testing time dari 3 hari menjadi 4 jam melalui otomasi',
+      'exp1-a3':   'Mengimplementasikan API contract testing yang berhasil mencegah 30+ breaking changes',
+      'exp1-a4':   'Meningkatkan code coverage dari 45% menjadi 82% dalam 6 bulan',
+      'exp2-desc': 'Bertanggung jawab atas testing platform fintech — mobile banking app dan backend API untuk transaksi keuangan.',
+      'exp2-a1':   'Merancang dan mengeksekusi 2000+ test case untuk fitur core banking',
+      'exp2-a2':   'Menemukan critical security bug sebelum go-live yang berpotensi merugikan nasabah',
+      'exp2-a3':   'Mengintegrasikan Appium ke Jenkins pipeline untuk mobile regression testing otomatis',
+      'exp3-desc': 'Memulai karir QA dengan fokus pada manual testing aplikasi web dan mobile untuk produk SaaS early-stage.',
+      'exp3-a1':   'Melakukan functional, regression, dan UAT testing untuk 10+ fitur rilis per bulan',
+      'exp3-a2':   'Membuat dokumentasi test plan dan bug report yang terstruktur dan detail',
+      'exp3-a3':   'Mulai belajar otomasi dengan Selenium WebDriver dan Python',
+      // Tools
+      'tools-label': 'Tech Stack',
+      'tools-title': 'Tools & Teknologi',
+      'tools-desc':  'Alat-alat yang saya gunakan sehari-hari untuk memastikan kualitas produk.',
+      // Projects
+      'proj-label':  'Portfolio',
+      'proj-title':  'Proyek Unggulan',
+      'proj-desc':   'Beberapa proyek QA yang paling berdampak yang pernah saya kerjakan.',
+      'proj1-title': 'E2E Testing Framework untuk Platform E-Commerce',
+      'proj1-desc':  'Membangun framework otomasi end-to-end dengan Playwright + TypeScript yang mencakup 500+ test case untuk user journey kritis — dari browse produk hingga checkout dan payment.',
+      'proj2-title': 'API Contract Testing untuk Microservices',
+      'proj2-desc':  'Mengimplementasikan consumer-driven contract testing menggunakan Pact untuk 15 microservices, memastikan tidak ada breaking changes yang lolos ke production.',
+      'proj3-title': 'Load Testing Infrastruktur Fintech',
+      'proj3-desc':  'Merancang dan menjalankan load test untuk backend API payment gateway — mensimulasikan 10.000 concurrent users dan mengidentifikasi 5 bottleneck performa sebelum peak season.',
+      'proj4-title': 'Mobile Regression Suite — Banking App',
+      'proj4-desc':  'Membangun suite regression testing otomatis untuk aplikasi mobile banking (iOS + Android) dengan Appium, terintegrasi ke CI/CD pipeline dan BrowserStack real device cloud.',
+      // Contact
+      'contact-label':  'Get In Touch',
+      'contact-title':  'Mari Bekerjasama',
+      'contact-desc':   'Terbuka untuk peluang full-time, freelance, atau konsultasi QA. Jangan ragu menghubungi saya!',
+      'form-name':      'Nama',
+      'form-name-ph':   'Nama lengkap Anda',
+      'form-email-ph':  'email@perusahaan.com',
+      'form-msg':       'Pesan',
+      'form-msg-ph':    'Ceritakan tentang proyek atau peluang yang ingin Anda diskusikan...',
+      'form-submit':    'Kirim Pesan →',
+      'footer-text':    'Dibuat dengan ❤️ oleh <span>Nama Anda</span> · 2025',
+    },
+    en: {
+      // Nav
+      'nav-skills':   'Skills',
+      'nav-exp':      'Experience',
+      'nav-tools':    'Tools',
+      'nav-projects': 'Projects',
+      'nav-contact':  'Contact',
+      'nav-cta':      'Hire Me',
+      // Hero
+      'hero-tag':     'Available for Opportunities',
+      'hero-years':   '7+ Years of Experience',
+      'hero-desc':    'I ensure digital products run flawlessly — from manual testing to end-to-end automation. Experienced in building scalable QA frameworks, improving product quality, and accelerating engineering team delivery.',
+      'hero-btn1':    'View Portfolio →',
+      'hero-btn2':    'Contact Me',
+      'stat1':        'Years Experience',
+      'stat2':        'Projects Completed',
+      'stat3':        'Bug Detection Rate',
+      // Skills
+      'skills-label': 'Core Expertise',
+      'skills-title': 'What I Do Best',
+      'skills-desc':  'Deep expertise across all aspects of Quality Assurance — from manual testing to enterprise-scale automation.',
+      'skill-auto-desc': 'Building reliable automation frameworks for UI, API, and regression testing that run fast and consistently.',
+      'skill-api-desc':  'Validating contract, functionality, and API performance using various tools and modern testing methodologies.',
+      'skill-perf-desc': 'Load testing, stress testing, and performance profiling to ensure system stability under high load.',
+      'skill-cicd-desc': 'Integrating testing into CI/CD pipelines so quality gates run automatically on every deployment.',
+      'skill-mgmt-desc': 'Test planning, test case creation, defect management, and reporting quality metrics to stakeholders.',
+      'skill-mob-desc':  'Testing native and hybrid mobile apps on Android & iOS using real devices and emulators/simulators.',
+      // Experience
+      'exp-label': 'Track Record',
+      'exp-title': 'Work Experience',
+      'exp-desc':  'My career journey building and improving the quality of digital products.',
+      'present':   'Present',
+      'exp1-desc': 'Leading a 5-person QA team to safeguard the quality of an e-commerce platform with millions of active users.',
+      'exp1-a1':   'Built a test automation framework from scratch using Playwright + TypeScript',
+      'exp1-a2':   'Reduced regression testing time from 3 days to 4 hours through automation',
+      'exp1-a3':   'Implemented API contract testing that successfully prevented 30+ breaking changes',
+      'exp1-a4':   'Increased code coverage from 45% to 82% within 6 months',
+      'exp2-desc': 'Responsible for testing a fintech platform — mobile banking app and backend API for financial transactions.',
+      'exp2-a1':   'Designed and executed 2000+ test cases for core banking features',
+      'exp2-a2':   'Discovered a critical security bug before go-live that could have harmed customers',
+      'exp2-a3':   'Integrated Appium into Jenkins pipeline for automated mobile regression testing',
+      'exp3-desc': 'Started QA career focusing on manual testing of web and mobile applications for early-stage SaaS products.',
+      'exp3-a1':   'Performed functional, regression, and UAT testing for 10+ feature releases per month',
+      'exp3-a2':   'Created structured and detailed test plan documentation and bug reports',
+      'exp3-a3':   'Began learning automation with Selenium WebDriver and Python',
+      // Tools
+      'tools-label': 'Tech Stack',
+      'tools-title': 'Tools & Technologies',
+      'tools-desc':  'The tools I use daily to ensure product quality.',
+      // Projects
+      'proj-label':  'Portfolio',
+      'proj-title':  'Featured Projects',
+      'proj-desc':   'Some of the most impactful QA projects I have worked on.',
+      'proj1-title': 'E2E Testing Framework for E-Commerce Platform',
+      'proj1-desc':  'Built an end-to-end automation framework with Playwright + TypeScript covering 500+ test cases for critical user journeys — from product browsing through checkout and payment.',
+      'proj2-title': 'API Contract Testing for Microservices',
+      'proj2-desc':  'Implemented consumer-driven contract testing using Pact for 15 microservices, ensuring no breaking changes slip into production.',
+      'proj3-title': 'Load Testing for Fintech Infrastructure',
+      'proj3-desc':  'Designed and executed load tests for a payment gateway backend API — simulating 10,000 concurrent users and identifying 5 performance bottlenecks before peak season.',
+      'proj4-title': 'Mobile Regression Suite — Banking App',
+      'proj4-desc':  'Built an automated regression testing suite for a mobile banking app (iOS + Android) with Appium, integrated into CI/CD pipeline and BrowserStack real device cloud.',
+      // Contact
+      'contact-label':  'Get In Touch',
+      'contact-title':  "Let's Work Together",
+      'contact-desc':   'Open to full-time, freelance, or QA consulting opportunities. Feel free to reach out!',
+      'form-name':      'Name',
+      'form-name-ph':   'Your full name',
+      'form-email-ph':  'email@company.com',
+      'form-msg':       'Message',
+      'form-msg-ph':    'Tell me about the project or opportunity you would like to discuss...',
+      'form-submit':    'Send Message →',
+      'footer-text':    'Made with ❤️ by <span>Jecky Saputra</span> · 2026',
+    }
+  };
+
+  function setLang(lang) {
+    const t = translations[lang];
+    // Update text/innerHTML for all data-id elements
+    document.querySelectorAll('[data-id]').forEach(el => {
+      const key = el.getAttribute('data-id');
+      if (!t[key]) return;
+      // Handle placeholder inputs/textareas
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = t[key];
+      } else {
+        el.innerHTML = t[key];
+      }
+    });
+    // Toggle active button
+    document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    // Update html lang attribute
+    document.documentElement.lang = lang;
+  }
+
+  function handleSubmit() {
+    const lang = document.documentElement.lang || 'id';
+    const msg = lang === 'en'
+      ? 'Thank you! I will get back to you shortly.'
+      : 'Terima kasih! Saya akan segera menghubungi Anda.';
+    alert(msg);
+  }
 </script>
 
 </body>
