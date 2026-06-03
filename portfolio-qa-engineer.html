@@ -735,12 +735,19 @@
      NAV — Edit name & links
 ============================================ -->
 <nav id="navbar">
-  <div class="nav-logo">// Sr. Software Quality Assurance Engineer</div>
+  <div class="nav-logo"> Sr. Software Quality Assurance Engineer <!-- ============================================
+     📄 DOWNLOAD CV BUTTON (HERO)
+============================================ -->
+<!-- Tambahkan di dalam .hero-actions -->
+<a href="https://drive.google.com/file/d/1ATUMQYp6R-icWWk_jg_Qvj-41qxsTthj/view?usp=drive_link" download class="btn-secondary">
+  Download CV ↓
+</a></div>
   <div class="nav-links">
     <a href="#skills" data-id="nav-skills">Skills</a>
     <a href="#experience" data-id="nav-exp">Experience</a>
     <a href="#tools" data-id="nav-tools">Tools</a>
     <a href="#projects" data-id="nav-projects">Projects</a>
+	<a href="#achievements" data-id="nav-projects">Achievements</a>
     <a href="#contact" data-id="nav-contact">Contact</a>
   </div>
   <div style="display:flex;align-items:center;gap:0.75rem;">
@@ -1003,6 +1010,74 @@
 
   </div>
 </section>
+
+<!-- ============================================
+     🏆 ACHIEVEMENT SECTION
+============================================ -->
+<hr class="divider">
+
+<section id="achievements">
+  <div class="section-label reveal">Highlights</div>
+  <h2 class="section-title reveal">Achievements</h2>
+  <p class="section-desc reveal">Pencapaian penting sepanjang perjalanan karir saya.</p>
+
+  <div class="skills-grid">
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🏆</div>
+      <div class="skill-title">Best QA Engineer</div>
+      <div class="skill-desc">Kontribusi signifikan dalam meningkatkan kualitas produk.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🚀</div>
+      <div class="skill-title">Automation Impact</div>
+      <div class="skill-desc">Mengurangi regression testing hingga 90%.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔒</div>
+      <div class="skill-title">Critical Bug Detection</div>
+      <div class="skill-desc">Menemukan bug kritis sebelum production.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================
+     🎓 CERTIFICATE SLIDER (AUTO + SWIPE)
+============================================ -->
+<hr class="divider">
+
+<section id="certificates">
+  <div class="section-label reveal">Credentials</div>
+  <h2 class="section-title reveal">Certificates</h2>
+
+  <div class="cert-wrapper reveal">
+    <div class="cert-track" id="certTrack">
+
+      <div class="cert-slide">
+        <img src="https://drive.google.com/file/d/1o56rigxyvXcPUZhl54yF271ctB52GNRN/view?usp=sharing" alt="DTE DevOps Engineer"
+      </div>
+
+      <div class="cert-slide">
+        <img src="cert2.jpg" alt="Certificate 2">
+      </div>
+
+      <div class="cert-slide">
+        <img src="cert3.jpg" alt="Certificate 3">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="cert-dots" id="certDots"></div>
+</section>
+
+
+
+
 
 <!-- ============================================
      CONTACT — Edit contact info
@@ -1273,7 +1348,71 @@
       : 'Terima kasih! Saya akan segera menghubungi Anda.';
     alert(msg);
   }
+  
+  // ================================
+  // 🎓 CERTIFICATE SLIDER (TAMBAHKAN DI SINI)
+  // ================================
+
+  const track = document.getElementById("certTrack");
+  const slides = document.querySelectorAll(".cert-slide");
+  const dotsContainer = document.getElementById("certDots");
+
+  let index = 0;
+  let startX = 0;
+  let isDragging = false;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("cert-dot");
+    if (i === 0) dot.classList.add("active");
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateSlider() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+
+    document.querySelectorAll(".cert-dot").forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+  }
+
+  function nextSlide() {
+    index = (index + 1) % slides.length;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    index = (index - 1 + slides.length) % slides.length;
+    updateSlider();
+  }
+
+  function goToSlide(i) {
+    index = i;
+    updateSlider();
+  }
+
+  setInterval(nextSlide, 3500);
+
+  track.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  });
+
+  track.addEventListener("touchend", (e) => {
+    if (!isDragging) return;
+
+    let endX = e.changedTouches[0].clientX;
+    let diff = startX - endX;
+
+    if (diff > 50) nextSlide();
+    if (diff < -50) prevSlide();
+
+    isDragging = false;
+  });
+
 </script>
 
 </body>
 </html>
+
