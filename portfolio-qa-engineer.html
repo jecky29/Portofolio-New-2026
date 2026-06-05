@@ -54,7 +54,7 @@
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
+    z-index: 90;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,7 +69,7 @@
 
   .nav-logo {
     font-family: var(--font-mono);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--accent);
     letter-spacing: 0.05em;
@@ -689,6 +689,72 @@
   footer span { color: var(--accent-light); }
 
   /* ============================================
+     WIP BANNER
+  ============================================ */
+  .wip-banner {
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    z-index: 99;
+    background: linear-gradient(90deg, #92400e, #b45309, #92400e);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+    padding: 0.55rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 13px;
+    font-family: var(--font-mono);
+    color: #fef3c7;
+    letter-spacing: 0.03em;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  .wip-banner-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #fcd34d;
+    flex-shrink: 0;
+    animation: blink 1.2s ease-in-out infinite;
+  }
+
+  .wip-banner-text { text-align: center; line-height: 1.4; }
+
+  .wip-banner-text strong { color: #fde68a; font-weight: 600; }
+
+  .wip-close {
+    position: absolute;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #fcd34d;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    line-height: 1;
+    transition: background 0.2s;
+    opacity: 0.7;
+  }
+
+  .wip-close:hover { background: rgba(255,255,255,0.12); opacity: 1; }
+
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  /* push hero down when banner visible */
+  body.wip-visible #hero { padding-top: 10rem; }
+  body.wip-visible nav  { top: 0; }
+
+  /* ============================================
      ANIMATIONS
   ============================================ */
   @keyframes fadeUp {
@@ -1055,12 +1121,13 @@
      NAV — Edit name & links
 ============================================ -->
 <nav id="navbar">
-  <div class="nav-logo"> Sr. Software Quality Assurance Engineer <!-- ============================================
+  <div class="nav-logo"> Sr. Software Quality Assurance Engineer 
+<!-- ============================================
      📄 DOWNLOAD CV BUTTON (HERO)
 ============================================ -->
 <!-- Tambahkan di dalam .hero-actions -->
-<a href="https://drive.google.com/uc?export=view&id=159djjYrR5_KRBENxEBsZAO4a9CLEHQJU" download class="btn-secondary">
-  Download CV ↓
+    <a href="https://drive.google.com/uc?export=view&id=159djjYrR5_KRBENxEBsZAO4a9CLEHQJU" class="nav-cta" data-id="nav-cta">Download CV ↓</a>
+  
 </a></div>
   <div class="nav-links">
     <a href="#skills" data-id="nav-skills">Skills</a>
@@ -1079,6 +1146,20 @@
   </div>
 </nav>
 
+
+
+
+<!-- ============================================
+     🚧 WIP BANNER — Remove this block when site is ready
+============================================ -->
+<section id="wipBanner">
+<div class="wip-banner" id="wipBanner">
+  <div class="wip-banner-dot"></div>
+  <div class="wip-banner-text" data-id="wip-text">
+    🚧 <strong>Website ini sedang dalam pengembangan.</strong> Beberapa fitur mungkin belum lengkap atau berubah sewaktu-waktu.
+  </div>
+  <button class="wip-close" onclick="dismissWip()" title="Tutup">✕</button>
+</div>
 <!-- ============================================
      HERO — Edit your name, role & summary
 ============================================ -->
@@ -1795,6 +1876,12 @@
       'form-msg-ph':    'Tell me about the project or opportunity you would like to discuss...',
       'form-submit':    'Send Message →',
       'footer-text':    'Made with ❤️ by <span>Jecky Saputra</span> · 2026',
+	   // Certificates
+      'cert-label': 'Credentials',
+      'cert-title': 'Certifications & Awards',
+      'cert-desc':  'Professional certificates I have earned as proof of competence in the Quality Assurance field.',
+      'nav-certs':  'Certificates',
+      'wip-text':   '🚧 <strong>This website is currently under development.</strong> Some features may be incomplete or subject to change.',
     }
   };
 
@@ -1825,6 +1912,23 @@
       : 'Terima kasih! Saya akan segera menghubungi Anda.';
     alert(msg);
   }
+
+  // ============================================
+  // 🚧 WIP BANNER
+  // ============================================
+  function dismissWip() {
+    const banner = document.getElementById('wipBanner');
+    banner.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateY(-100%)';
+    setTimeout(() => {
+      banner.style.display = 'none';
+      document.body.classList.remove('wip-visible');
+    }, 300);
+  }
+
+  // Mark body so hero padding adjusts
+  document.body.classList.add('wip-visible');
 
   // ============================================
   // 🎞️ CERTIFICATE SLIDESHOW ENGINE
@@ -1984,4 +2088,3 @@
 
 </body>
 </html>
-
