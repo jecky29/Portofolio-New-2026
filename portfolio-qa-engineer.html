@@ -558,6 +558,262 @@
     border-radius: 4px;
   }
 
+ /* ============================================
+     PROJECT DETAIL BUTTON
+  ============================================ */
+  .project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .project-meta-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    flex: 1;
+  }
+
+  .btn-see-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    background: var(--accent-pale);
+    border: 1px solid transparent;
+    padding: 0.38rem 0.9rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+    flex-shrink: 0;
+  }
+
+  .btn-see-details:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .btn-see-details svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================
+     PROJECT DETAIL MODAL
+  ============================================ */
+  .proj-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 20, 0.88);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(8px);
+    padding: 1.5rem;
+  }
+
+  .proj-modal-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .proj-modal-box {
+    position: relative;
+    width: min(740px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    transform: scale(0.92) translateY(16px);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-pale) transparent;
+  }
+
+  .proj-modal-backdrop.open .proj-modal-box {
+    transform: scale(1) translateY(0);
+  }
+
+  .proj-modal-box::-webkit-scrollbar { width: 5px; }
+  .proj-modal-box::-webkit-scrollbar-thumb { background: var(--accent-pale); border-radius: 10px; }
+
+  .proj-modal-header {
+    position: relative;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .proj-modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--ink-soft);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    line-height: 1;
+  }
+
+  .proj-modal-close:hover { background: var(--ink); color: white; }
+
+  .proj-modal-category {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-pale);
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  .proj-modal-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    padding-right: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .proj-modal-subtitle {
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.03em;
+  }
+
+  .proj-modal-body {
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .proj-modal-section-title {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.65rem;
+  }
+
+  .proj-modal-desc {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+
+  .proj-modal-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .proj-modal-highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  .proj-modal-highlight-dot {
+    width: 20px;
+    height: 20px;
+    background: var(--accent-pale);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 10px;
+    color: var(--accent);
+  }
+
+  .proj-modal-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .proj-modal-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .proj-modal-stat-num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .proj-modal-stat-label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.3;
+  }
+
+  .proj-modal-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .proj-modal-tech-chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+  }
+
+  .proj-modal-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
   /* ============================================
      CONTACT
   ============================================ */
@@ -1219,7 +1475,7 @@
       <div class="skill-title">API Testing</div>
       <div class="skill-desc" data-id="skill-api-desc">Validasi contract, fungsionalitas, dan performa API menggunakan berbagai tools dan metodologi testing modern.</div>
       <div class="skill-tags">
-        <span class="tag">Postman</span><span class="tag"></span><span class="tag">SoapUI</span><span class="tag"></span>
+        <span class="tag">Postman</span><span class="tag">SoapUI</span>
       </div>
     </div>
 
@@ -1228,7 +1484,7 @@
       <div class="skill-title">Performance Testing</div>
       <div class="skill-desc" data-id="skill-perf-desc">Load testing, stress testing, dan profiling performa untuk memastikan sistem stabil di bawah beban tinggi.</div>
       <div class="skill-tags">
-        <span class="tag">JMeter</span><span class="tag">k6</span><span class="tag"></span>
+        <span class="tag">JMeter</span><span class="tag">k6</span>
       </div>
     </div>
 
@@ -1281,10 +1537,14 @@
       <div class="exp-company">PT. Accord Inovations</div>
       <div class="exp-desc" data-id="exp1-desc">Memimpin tim QA beranggotakan 2 orang dalam mengawal kualitas platform e-commerce dengan jutaan pengguna aktif.</div>
       <ul class="exp-achievements">
-        <li data-id="exp1-a1">Membangun test automation framework dari nol menggunakan Playwright + TypeScript</li>
-        <li data-id="exp1-a2">Mengurangi regression testing time dari 3 hari menjadi 4 jam melalui otomasi</li>
-        <li data-id="exp1-a3">Mengimplementasikan API contract testing yang berhasil mencegah 30+ breaking changes</li>
-        <li data-id="exp1-a4">Meningkatkan code coverage dari 45% menjadi 82% dalam 6 bulan</li>
+        <li data-id="exp1-a1">Memimpin pengujian end-to-end untuk sistem perbankan (SIT, UAT, regresi) pada core banking dan digital banking</li>
+        <li data-id="exp1-a2">Menyusun dan mengeksekusi strategi pengujian, test plan, serta skenario uji yang selaras dengan kebutuhan bisnis dan analisis risiko</li>
+        <li data-id="exp1-a3">Mengelola dan membimbing tim QA untuk memastikan kualitas hasil kerja yang tinggi dan penyelesaian proyek tepat waktu</li>
+        <li data-id="exp1-a4">Berkolaborasi dengan Product Owner, Business Analyst, Developer, serta tim Risk/Compliance untuk validasi kebutuhan dan penyelesaian defect</li>
+		<li data-id="exp1-a5">Memastikan sistem mematuhi regulasi (OJK/POJK) serta mendukung proses HTRO (Operational Risk Review)</li>
+		<li data-id="exp1-a6">Melakukan manajemen siklus defect (identifikasi, pelacakan, prioritas, dan penutupan) menggunakan tools seperti JIRA/ALM</li>
+		<li data-id="exp1-a7">Melakukan review terhadap test case, hasil eksekusi pengujian, dan dokumentasi QA untuk menjaga standar kualitas testing</li>
+		<li data-id="exp1-a8">Mendukung manajemen rilis dan memberikan QA sign-off sebelum deployment ke produksi</li>
       </ul>
     </div>
 
@@ -1316,9 +1576,10 @@
       <div class="exp-company">PT. Mutual+ Global Resource </div>
       <div class="exp-desc" data-id="exp3-desc">Memulai karir QA dengan fokus pada manual testing aplikasi web dan mobile untuk produk SaaS early-stage.</div>
       <ul class="exp-achievements">
-        <li data-id="exp3-a1">Melakukan functional, regression, dan UAT testing untuk 10+ fitur rilis per bulan</li>
-        <li data-id="exp3-a2">Membuat dokumentasi test plan dan bug report yang terstruktur dan detail</li>
-        <li data-id="exp3-a3">Mulai belajar otomasi dengan Selenium WebDriver dan Python</li>
+        <li data-id="exp3-a1">Memastikan bahwa semua elemen visual pada halaman web berfungsi dengan baik dan memiliki antarmuka yang mudah dipahami serta digunakan oleh pengguna( User Friendly ) </li>
+        <li data-id="exp3-a2">Membuat skenario pengujian berdasarkan hasil Code Review dan Dokumen Spesifikasi Pengembangan, agar sesuai dengan ekspektasi kebutuhan pengguna maupun bisnis.</li>
+        <li data-id="exp3-a3">Melakukan pengujian secara menyeluruh di berbagai aspek, termasuk pengujian fungsional, browser, UI/UX, responsivitas, keamanan, serta regression testing.</li>
+		<li data-id="exp3-a4">Menyusun dokumentasi hasil pengujian secara detail, termasuk laporan bug, skrip pengujian, dan daftar perbaikan, serta mengorganisir dan memelihara dokumentasi tersebut untuk referensi di masa mendatang.</li>
       </ul>
     </div>
 
@@ -1370,53 +1631,77 @@
   <div class="projects-grid">
 
     <div class="project-card reveal">
-      <div class="project-tag">Automation Framework</div>
-      <div class="project-title" data-id="proj1-title">E2E Testing Framework untuk Platform E-Commerce</div>
-      <div class="project-desc" data-id="proj1-desc">Membangun framework otomasi end-to-end dengan Playwright + TypeScript yang mencakup 500+ test case untuk user journey kritis — dari browse produk hingga checkout dan payment.</div>
-      <div class="project-meta">
-        <span class="project-tech">Playwright</span>
-        <span class="project-tech">TypeScript</span>
-        <span class="project-tech">GitHub Actions</span>
-        <span class="project-tech">Allure</span>
+      <div class="project-tag">Migration Core Banking to Linux (MTL) </div>
+      <div class="project-title" data-id="proj1-title">MIgration To LInux ( MTL )</div>
+      <div class="project-desc" data-id="proj1-desc">Proyek ini berfokus pada migrasi sistem ke lingkungan Linux untuk meningkatkan performa, stabilitas, dan efisiensi operasional, khususnya pada layanan produk kartu debit..</div>
+	  <div class="project-footer">
+	   <div class="project-meta-inline">
+        <span class="project-tech">New Core Banking System (NCBS)</span>
+        <span class="project-tech">MySql</span>
+        <span class="project-tech">Confluence</span>
+        <span class="project-tech">Jira</span>
       </div>
+	   
+      </div>
+	  <button class="btn-see-details" onclick="openProjectModal('proj1')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="5" x2="8" y2="8"/><circle cx="8" cy="11" r="0.5" fill="currentColor" stroke="none"/></svg>
+          See Details
+        </button>
     </div>
 
     <div class="project-card reveal">
-      <div class="project-tag">API Testing</div>
+      <div class="project-tag">API Testing ( Migrasi service monolith to Microservice Runtime ) </div>
       <div class="project-title" data-id="proj2-title">API Contract Testing untuk Microservices</div>
       <div class="project-desc" data-id="proj2-desc">Mengimplementasikan consumer-driven contract testing menggunakan Pact untuk 15 microservices, memastikan tidak ada breaking changes yang lolos ke production.</div>
-      <div class="project-meta">
+	  <div class="project-footer">
+	   <div class="project-meta-inline">
         <span class="project-tech">Pact</span>
         <span class="project-tech">Java</span>
         <span class="project-tech">Spring Boot</span>
         <span class="project-tech">Jenkins</span>
       </div>
+	  
+      </div>
+	   <button class="btn-see-details" onclick="openProjectModal('proj1')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="5" x2="8" y2="8"/><circle cx="8" cy="11" r="0.5" fill="currentColor" stroke="none"/></svg>
+          See Details
+        </button>
     </div>
 
     <div class="project-card reveal">
       <div class="project-tag">Performance Testing</div>
       <div class="project-title" data-id="proj3-title">Load Testing Infrastruktur Microservice</div>
       <div class="project-desc" data-id="proj3-desc">Merancang dan menjalankan load test untuk backend API payment gateway — mensimulasikan 10.000 concurrent users dan mengidentifikasi 5 bottleneck performa sebelum peak season.</div>
-      <div class="project-meta">
+	  <div class="project-footer">
+	   <div class="project-meta-inline">
         <span class="project-tech">k6</span>
         <span class="project-tech">Grafana</span>
         <span class="project-tech">Jmeter</span>
-        
       </div>
+	  
+      </div>
+	   <button class="btn-see-details" onclick="openProjectModal('proj1')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="5" x2="8" y2="8"/><circle cx="8" cy="11" r="0.5" fill="currentColor" stroke="none"/></svg>
+          See Details
+        </button>
     </div>
 
     <div class="project-card reveal">
       <div class="project-tag">Mobile Testing</div>
       <div class="project-title" data-id="proj4-title">Mobile Regression Suite — Banking App</div>
       <div class="project-desc" data-id="proj4-desc">Membangun suite regression testing otomatis untuk aplikasi mobile banking (iOS + Android) dengan Appium, terintegrasi ke CI/CD pipeline dan BrowserStack real device cloud.</div>
-      <div class="project-meta">
+	  <div class="project-footer">
+	   <div class="project-meta-inline">
         <span class="project-tech">Appium</span>
         <span class="project-tech">Python</span>
         <span class="project-tech">BrowserStack</span>
         <span class="project-tech">GitLab CI</span>
       </div>
     </div>
-
+		<button class="btn-see-details" onclick="openProjectModal('proj1')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="5" x2="8" y2="8"/><circle cx="8" cy="11" r="0.5" fill="currentColor" stroke="none"/></svg>
+          See Details
+        </button>
   </div>
 </section>
 
@@ -1434,7 +1719,7 @@
 
     <div class="skill-card reveal">
       <div class="skill-icon">🏆</div>
-      <div class="skill-title">Best QA Engineer</div>
+      <div class="skill-title">Best QA of The Year </div>
       <div class="skill-desc">Kontribusi signifikan dalam meningkatkan kualitas produk.</div>
     </div>
 
@@ -1589,6 +1874,56 @@
 </section>
 
 <!-- ============================================
+     PROJECT DETAIL MODAL
+============================================ -->
+<div class="proj-modal-backdrop" id="projModal" onclick="handleProjBackdropClick(event)">
+  <div class="proj-modal-box" id="projModalBox">
+
+    <div class="proj-modal-header">
+      <button class="proj-modal-close" onclick="closeProjectModal()" title="Tutup">✕</button>
+      <div class="proj-modal-category" id="pmCategory">—</div>
+      <div class="proj-modal-title" id="pmTitle">—</div>
+      <div class="proj-modal-subtitle" id="pmSubtitle">—</div>
+    </div>
+
+    <div class="proj-modal-body">
+
+      <!-- Overview -->
+      <div>
+        <div class="proj-modal-section-title">Overview</div>
+        <p class="proj-modal-desc" id="pmOverview">—</p>
+      </div>
+
+      <hr class="proj-modal-divider">
+
+      <!-- Key Highlights -->
+      <div>
+        <div class="proj-modal-section-title">Key Highlights</div>
+        <div class="proj-modal-highlights" id="pmHighlights"></div>
+      </div>
+
+      <hr class="proj-modal-divider">
+
+      <!-- Stats -->
+      <div>
+        <div class="proj-modal-section-title">Impact & Metrics</div>
+        <div class="proj-modal-stats" id="pmStats"></div>
+      </div>
+
+      <hr class="proj-modal-divider">
+
+      <!-- Tech Stack -->
+      <div>
+        <div class="proj-modal-section-title">Tech Stack</div>
+        <div class="proj-modal-tech" id="pmTech"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================
      CERTIFICATE SLIDESHOW MODAL
 ============================================ -->
 <div class="modal-backdrop" id="certModal" onclick="handleBackdropClick(event)">
@@ -1679,7 +2014,7 @@
 </section>
 
 <footer>
-  <p data-id="footer-text">Dibuat dengan ❤️ oleh <span>	Jecky Saputra</span> · 2025</p>
+  <p data-id="footer-text">Dibuat dengan ❤️ oleh <span>	Jecky Saputra</span> · 2026</p>
 </footer>
 
 <!-- ============================================
@@ -1725,6 +2060,7 @@
       'nav-projects': 'Projects',
       'nav-contact':  'Contact',
       'nav-cta':      'Hire Me',
+
       // Hero
       'hero-tag':     'Available for Opportunities',
       'hero-years':   '7+ Tahun Pengalaman',
@@ -1750,10 +2086,14 @@
       'exp-desc':  'Perjalanan karir saya dalam membangun dan meningkatkan kualitas produk digital.',
       'present':   'Sekarang',
       'exp1-desc': 'Memimpin tim QA beranggotakan 5 orang dalam mengawal kualitas platform e-commerce dengan jutaan pengguna aktif.',
-      'exp1-a1':   'Membangun test automation framework dari nol menggunakan Playwright + TypeScript',
-      'exp1-a2':   'Mengurangi regression testing time dari 3 hari menjadi 4 jam melalui otomasi',
-      'exp1-a3':   'Mengimplementasikan API contract testing yang berhasil mencegah 30+ breaking changes',
-      'exp1-a4':   'Meningkatkan code coverage dari 45% menjadi 82% dalam 6 bulan',
+      'exp1-a1':   'Memimpin pengujian end-to-end untuk sistem perbankan (SIT, UAT, regresi) pada core banking dan digital banking',
+      'exp1-a2':   'Menyusun dan mengeksekusi strategi pengujian, test plan, serta skenario uji yang selaras dengan kebutuhan bisnis dan analisis risiko',
+      'exp1-a3':   'Mengelola dan membimbing tim QA untuk memastikan kualitas hasil kerja yang tinggi dan penyelesaian proyek tepat waktu',
+      'exp1-a4':   'Berkolaborasi dengan Product Owner, Business Analyst, Developer, serta tim Risk/Compliance untuk validasi kebutuhan dan penyelesaian defect',
+	  'exp1-a5':   'Memastikan sistem mematuhi regulasi (OJK/POJK) serta mendukung proses HTRO (Operational Risk Review)',
+	  'exp1-a6':   'Melakukan manajemen siklus defect (identifikasi, pelacakan, prioritas, dan penutupan) menggunakan tools seperti JIRA/ALM',
+	  'exp1-a7':   'Melakukan review terhadap test case, hasil eksekusi pengujian, dan dokumentasi QA untuk menjaga standar kualitas testing',
+	  'exp1-a8':   'Mendukung manajemen rilis dan memberikan QA sign-off sebelum deployment ke produksi',
       'exp2-desc': 'Memimpin tim / Squad QA beranggotakan Total 9 orang dalam mengawal kualitas aplikasi Banking dengan jutaan pengguna aktif serta Bertanggung jawab atas testing khususnya di platform Middleware — mobile banking app dan backend API untuk transaksi keuangan.',
       'exp2-a1':   'Grooming / Sprint Planning: Sebagai QA Middleware, saya mengikuti setiap aktivitas Agile Sprint Planning pada seluruh aplikasi di BRI yang menggunakan SDLC (Agile), untuk memastikan bahwa beban load testing yang masuk tidak melebihi kapasitas dan kemampuan tim. (Tester Lead)',
       'exp2-a2':   'Bertanggung jawab terhadap kualitas seluruh aplikasi yang dikembangkan sesuai dengan spesifikasi dalam dokumen business requirement. (Tester Lead dan Tester)',
@@ -1766,9 +2106,10 @@
 	  'exp2-a9':   'Deployment: Mengawasi aktivitas deployment aplikasi ke Production dan memastikan pengujian dilakukan secara komprehensif agar tidak terjadi rollback atau masalah lain saat production. (Tester Lead dan Tester)',
 	  'exp2-a10':  'Piloting: Mengawasi setiap aktivitas piloting dan memastikan seluruh fitur sudah sesuai sebelum dilakukan rollout aplikasi. (Tester Lead dan Tester)',
       'exp3-desc': 'Memulai karir QA dengan fokus pada manual testing aplikasi web dan mobile untuk produk SaaS early-stage.',
-      'exp3-a1':   'Melakukan functional, regression, dan UAT testing untuk 10+ fitur rilis per bulan',
-      'exp3-a2':   'Membuat dokumentasi test plan dan bug report yang terstruktur dan detail',
-      'exp3-a3':   'Mulai belajar otomasi dengan Selenium WebDriver dan Python',
+      'exp3-a1':   'Memastikan bahwa semua elemen visual pada halaman web berfungsi dengan baik dan memiliki antarmuka yang mudah dipahami serta digunakan oleh pengguna (User Friendly) ',
+      'exp3-a2':   'Membuat skenario pengujian berdasarkan hasil Code Review dan Dokumen Spesifikasi Pengembangan, agar sesuai dengan ekspektasi kebutuhan pengguna maupun bisnis.',
+      'exp3-a3':   'Melakukan pengujian secara menyeluruh di berbagai aspek, termasuk pengujian fungsional, browser, UI/UX, responsivitas, keamanan, serta regression testing.',
+	  'exp3-a4':   'Menyusun dokumentasi hasil pengujian secara detail, termasuk laporan bug, skrip pengujian, dan daftar perbaikan, serta mengorganisir dan memelihara dokumentasi tersebut untuk referensi di masa mendatang.',
       // Tools
       'tools-label': 'Tech Stack',
       'tools-title': 'Tools & Teknologi',
@@ -1830,10 +2171,14 @@
       'exp-desc':  'My career journey building and improving the quality of digital products.',
       'present':   'Present',
       'exp1-desc': 'Leading a 5-person QA team to safeguard the quality of an e-commerce platform with millions of active users.',
-      'exp1-a1':   'Built a test automation framework from scratch using Playwright + TypeScript',
-      'exp1-a2':   'Reduced regression testing time from 3 days to 4 hours through automation',
-      'exp1-a3':   'Implemented API contract testing that successfully prevented 30+ breaking changes',
-      'exp1-a4':   'Increased code coverage from 45% to 82% within 6 months',
+      'exp1-a1':   'Led end-to-end testing for banking systems ( SIT, UAT, regression ) testing for core banking and digital banking systems',
+      'exp1-a2':   'Defined and executed test strategy, test plan, and test scenarios aligned with business requirements and risk assessment',
+      'exp1-a3':   'Managed and mentored QA team to ensure high-quality deliverables and timely project execution',
+      'exp1-a4':   'Collaborated with Product Owner, Business Analyst, Developer, and Risk/Compliance teams for requirement validation and defect resolution',
+	  'exp1-a5':   'Ensured system compliance with regulatory requirements (OJK / POJK) and supported HTRO (Operational Risk Review) processes',
+	  'exp1-a6':   'Performed defect management lifecycle (identification, tracking, prioritization, and closure) using tools (e.g.,JIRA / ALM)',
+	  'exp1-a7':   'Conducted review of test cases, test execution results, and QA documentation to maintain testing quality standards',
+	  'exp1-a8':   'Supported release management and provided QA sign-off before production deployment',
 	  'exp2-desc': 'Led a QA squad of 9 members, ensuring the quality of a banking application with millions of active users. Responsible for testing, especially on the middleware platform, including the mobile banking app and backend APIs for financial transactions.',
       'exp2-a1':   'Grooming / Sprint Planning, As QA Middleware I follow every Agile Sprint Planning activity on all applications in BRI which are SDLC (Agile), to ensure that the incoming load testing does not exceed the capacity and capabilities of a team. (Tester Lead)',
       'exp2-a2':   'Responsible for the quality of all applications that are carried out in accordance with the specifications of the business requirement development document. (Tester Lead and Tester)',
@@ -1846,9 +2191,10 @@
 	  'exp2-a9':   'Deployment, Oversee the Deployment activities of an application to Production and ensure Comprehensive Testing so that rollbacks and other problems do not occur during production. (Tester Lead and Tester)',
 	  'exp2-a10':  'Piloting, supervise each Piloting activity and ensure all features are appropriate before Rollout of the application. (Tester Lead and Tester)',
       'exp3-desc': 'Started QA career focusing on manual testing of web and mobile applications for early-stage SaaS products.',
-      'exp3-a1':   'Performed functional, regression, and UAT testing for 10+ feature releases per month',
-      'exp3-a2':   'Created structured and detailed test plan documentation and bug reports',
-      'exp3-a3':   'Began learning automation with Selenium WebDriver and Python',
+      'exp3-a1':   'Ensure that all visual elements of the web page function properly and have an interface that is easy for users to understand and use.',
+      'exp3-a2':   'Create test scenarios based on the results of Code Review and Development Specification Documents, in order to match the User / Business Request Expectations',
+      'exp3-a3':   'Conduct comprehensive testing at several points both functionally, Browser, UI / UX, Responsive, Security and Regression Testing.',
+	  'exp3-a4':   'Compile detailed test result documentation, including bug reports, test scripts and fix lists, Organize and maintain test documentation for future reference.',
       // Tools
       'tools-label': 'Tech Stack',
       'tools-title': 'Tools & Technologies',
@@ -1911,6 +2257,155 @@
       ? 'Thank you! I will get back to you shortly.'
       : 'Terima kasih! Saya akan segera menghubungi Anda.';
     alert(msg);
+  }
+  // ============================================
+  // 📂 PROJECT DETAIL MODAL
+  // ============================================
+  const projectData = {
+    proj1: {
+      category: 'Migration Core Banking to Linux (MTL)',
+      title: 'E2E Testing Framework untuk Platform E-Commerce',
+      subtitle: 'End-to-End Automation · Playwright + TypeScript',
+      overview: 'Membangun framework otomasi end-to-end yang komprehensif menggunakan Playwright + TypeScript untuk platform e-commerce skala enterprise. Framework ini dirancang untuk memastikan stabilitas seluruh user journey kritis mulai dari browse produk, add to cart, checkout, hingga konfirmasi pembayaran — dengan coverage lebih dari 500 test case yang berjalan otomatis di setiap deployment.',
+      highlights: [
+        'Merancang arsitektur Page Object Model (POM) yang skalabel untuk mempermudah maintenance jangka panjang.',
+        'Mengintegrasikan test suite ke pipeline GitHub Actions sehingga setiap PR ter-trigger otomatis.',
+        'Membuat laporan pengujian interaktif menggunakan Allure Report dengan screenshot & video on failure.',
+        'Menurunkan waktu regression testing manual dari 3 hari menjadi kurang dari 2 jam secara otomatis.',
+        'Mendeteksi 47 bug kritis sebelum masuk ke production selama 6 bulan pertama operasional.'
+      ],
+      stats: [
+        { num: '500+', label: 'Test Cases' },
+        { num: '94%', label: 'Pass Rate' },
+        { num: '−89%', label: 'Regression Time' },
+        { num: '47', label: 'Bugs Prevented' }
+      ],
+      tech: ['Playwright', 'TypeScript', 'GitHub Actions', 'Allure Report', 'Node.js', 'Page Object Model', 'CI/CD']
+    },
+    proj2: {
+      category: 'API Testing · Migrasi Monolith ke Microservice',
+      title: 'API Contract Testing untuk Microservices',
+      subtitle: 'Consumer-Driven Contract Testing · Pact + Java',
+      overview: 'Mengimplementasikan consumer-driven contract testing menggunakan framework Pact untuk memvalidasi kompatibilitas antara 15 microservices yang berjalan secara independen. Solusi ini memastikan tidak ada breaking changes yang lolos ke production saat terjadi migrasi besar dari arsitektur monolith ke microservice runtime, sekaligus mempercepat siklus delivery tim.',
+      highlights: [
+        'Mendefinisikan dan memelihara contract antar 15 microservice menggunakan Pact Broker terpusat.',
+        'Mengintegrasikan contract verification ke pipeline Jenkins agar setiap build otomatis tervalidasi.',
+        'Mengurangi waktu debugging integration issue dari rata-rata 2 hari menjadi kurang dari 3 jam.',
+        'Membangun dashboard monitoring contract compatibility untuk kebutuhan visibilitas tim lintas-domain.',
+        'Berkolaborasi dengan 4 tim development berbeda untuk menstandarisasi consumer contract workflow.'
+      ],
+      stats: [
+        { num: '15', label: 'Microservices' },
+        { num: '100%', label: 'Contract Coverage' },
+        { num: '0', label: 'Breaking Changes' },
+        { num: '−85%', label: 'Debug Time' }
+      ],
+      tech: ['Pact', 'Java', 'Spring Boot', 'Jenkins', 'Pact Broker', 'REST API', 'Maven']
+    },
+    proj3: {
+      category: 'Performance Testing · Fintech Infrastructure',
+      title: 'Load Testing Infrastruktur Microservice',
+      subtitle: 'Load & Stress Testing · k6 + Grafana + JMeter',
+      overview: 'Merancang dan mengeksekusi skenario load testing end-to-end untuk backend API payment gateway sebuah perusahaan fintech menjelang peak season. Pengujian ini mensimulasikan hingga 10.000 concurrent users secara realistis dan berhasil mengidentifikasi 5 bottleneck kritis pada infrastruktur sebelum masuk periode transaksi tertinggi, mencegah potensi downtime yang sangat merugikan.',
+      highlights: [
+        'Merancang skenario load test realistis berdasarkan pola trafik historis produksi selama 12 bulan.',
+        'Mensimulasikan 10.000 concurrent users dengan ramp-up gradual untuk memetakan breaking point sistem.',
+        'Mengidentifikasi 5 bottleneck kritis: database connection pool, memory leak pada 2 service, dan timeout konfigurasi.',
+        'Memvisualisasikan real-time metrics menggunakan Grafana dashboard terintegrasi dengan InfluxDB.',
+        'Menyusun laporan rekomendasi optimasi yang menghasilkan peningkatan throughput sebesar 3× setelah implementasi.'
+      ],
+      stats: [
+        { num: '10K', label: 'Concurrent Users' },
+        { num: '5', label: 'Bottlenecks Found' },
+        { num: '3×', label: 'Throughput Gain' },
+        { num: '99.9%', label: 'Uptime Post-Fix' }
+      ],
+      tech: ['k6', 'Grafana', 'JMeter', 'InfluxDB', 'Docker', 'Linux', 'Python scripting']
+    },
+    proj4: {
+      category: 'Mobile Testing · Banking App',
+      title: 'Mobile Regression Suite — Banking App',
+      subtitle: 'Mobile Automation · Appium + Python + BrowserStack',
+      overview: 'Membangun suite regression testing otomatis yang komprehensif untuk aplikasi mobile banking di platform iOS dan Android menggunakan Appium. Suite ini diintegrasikan langsung ke dalam pipeline GitLab CI dan menggunakan BrowserStack real device cloud untuk memastikan kompatibilitas di lebih dari 30 kombinasi perangkat dan versi OS — tanpa ketergantungan pada perangkat fisik internal.',
+      highlights: [
+        'Membangun 300+ automated test case untuk alur kritis: login, transfer, pembayaran tagihan, dan mutasi rekening.',
+        'Mengonfigurasi BrowserStack Automate untuk parallel testing di 30+ real device (iOS & Android).',
+        'Mengintegrasikan test execution ke GitLab CI sehingga regression berjalan otomatis setiap merge ke main branch.',
+        'Mengurangi manual regression testing mobile dari 5 hari menjadi kurang dari 4 jam dengan paralelisasi.',
+        'Membangun mekanisme retry otomatis dan screenshot capturing untuk mempermudah analisis failure.'
+      ],
+      stats: [
+        { num: '300+', label: 'Test Cases' },
+        { num: '30+', label: 'Real Devices' },
+        { num: '−92%', label: 'Testing Time' },
+        { num: '2', label: 'Platforms (iOS+Android)' }
+      ],
+      tech: ['Appium', 'Python', 'BrowserStack', 'GitLab CI', 'pytest', 'iOS', 'Android', 'Selenium Grid']
+    }
+  };
+
+  function openProjectModal(id) {
+    const d = projectData[id];
+    if (!d) return;
+
+    document.getElementById('pmCategory').textContent  = d.category;
+    document.getElementById('pmTitle').textContent     = d.title;
+    document.getElementById('pmSubtitle').textContent  = d.subtitle;
+    document.getElementById('pmOverview').textContent  = d.overview;
+
+    // Highlights
+    const hl = document.getElementById('pmHighlights');
+    hl.innerHTML = d.highlights.map(h => `
+      <div class="proj-modal-highlight-item">
+        <div class="proj-modal-highlight-dot">→</div>
+        <span>${h}</span>
+      </div>`).join('');
+
+    // Stats
+    const st = document.getElementById('pmStats');
+    st.innerHTML = d.stats.map(s => `
+      <div class="proj-modal-stat">
+        <div class="proj-modal-stat-num">${s.num}</div>
+        <div class="proj-modal-stat-label">${s.label}</div>
+      </div>`).join('');
+
+    // Tech
+    const tc = document.getElementById('pmTech');
+    tc.innerHTML = d.tech.map(t => `<span class="proj-modal-tech-chip">${t}</span>`).join('');
+
+    // Scroll to top of modal
+    document.getElementById('projModalBox').scrollTop = 0;
+
+    const modal = document.getElementById('projModal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onProjKeyDown);
+  }
+
+  function closeProjectModal() {
+    const modal = document.getElementById('projModal');
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onProjKeyDown);
+  }
+
+  function handleProjBackdropClick(e) {
+    if (e.target === document.getElementById('projModal')) closeProjectModal();
+  }
+
+  function onProjKeyDown(e) {
+    if (e.key === 'Escape') closeProjectModal();
+  }
+
+  function dismissWip() {
+    const banner = document.getElementById('wipBanner');
+    banner.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateY(-100%)';
+    setTimeout(() => {
+      banner.style.display = 'none';
+      document.body.classList.remove('wip-visible');
+    }, 300);
   }
 
   // ============================================
